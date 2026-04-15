@@ -163,7 +163,7 @@ export default function HomePage() {
                     className="text-sm font-semibold mb-3"
                     style={{
                       fontFamily: "var(--font-mono, monospace)",
-                      color: "var(--border-2)",
+                      color: "var(--accent)",
                     }}
                   >
                     {tool.num}
@@ -182,7 +182,7 @@ export default function HomePage() {
                   </div>
                   <span
                     className="absolute bottom-4 right-5 text-base"
-                    style={{ color: "var(--border-2)" }}
+                    style={{ color: "var(--accent)" }}
                   >
                     →
                   </span>

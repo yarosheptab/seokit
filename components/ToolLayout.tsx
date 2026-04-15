@@ -69,13 +69,15 @@ export default function ToolLayout({
                   <button
                     key={t.key}
                     onClick={() => onTabChange(t.key)}
-                    className="text-sm px-3 py-1.5 rounded transition-colors duration-150"
+                    className="text-sm px-3 py-1.5 transition-colors duration-150"
                     style={{
-                      background: active ? "var(--accent-light)" : "transparent",
+                      background: "transparent",
                       color: active ? "var(--accent)" : "var(--subtle)",
                       border: "none",
+                      borderBottom: active ? "2px solid var(--accent)" : "2px solid transparent",
                       cursor: "pointer",
                       fontWeight: active ? 600 : 500,
+                      paddingBottom: "0.5rem",
                     }}
                   >
                     {t.label}

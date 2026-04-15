@@ -25,8 +25,12 @@ export default function Navbar() {
 
       <div className="flex gap-1">
         {links.map((l) => {
+          const toolPaths = ["/meta-analyzer", "/sitemap-validator", "/keyword-density", "/robots-tester", "/redirect-checker", "/schema-validator"];
+          const isToolPage = toolPaths.some((p) => pathname.startsWith(p));
           const active =
-            l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
+            l.href === "/"
+              ? pathname === "/" || isToolPage
+              : pathname.startsWith(l.href);
           return (
             <Link
               key={l.href}

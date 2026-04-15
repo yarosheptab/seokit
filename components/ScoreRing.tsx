@@ -49,9 +49,8 @@ export default function ScoreRing({
           y={size / 2}
           textAnchor="middle"
           dominantBaseline="central"
+          transform={`rotate(90, ${size / 2}, ${size / 2})`}
           style={{
-            transform: "rotate(90deg)",
-            transformOrigin: `${size / 2}px ${size / 2}px`,
             fontFamily: "var(--font-mono, monospace)",
             fontSize: size * 0.22,
             fontWeight: 700,

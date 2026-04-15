@@ -12,31 +12,51 @@ export interface MetaResult {
   tags: MetaTag[];
 }
 
+// Extract an attribute value from a single HTML tag string,
+// handling both single-quoted and double-quoted attribute values.
+function getAttr(tag: string, attr: string): string {
+  const dq = new RegExp(`\\b${attr}="([^"]*)"`, "i").exec(tag);
+  if (dq) return dq[1].replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+  const sq = new RegExp(`\\b${attr}='([^']*)'`, "i").exec(tag);
+  if (sq) return sq[1].replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+  return "";
+}
+
 export function parseMeta(html: string): MetaResult {
   const get = (pattern: RegExp) => {
     const m = html.match(pattern);
     return m ? m[1].replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim() : "";
   };
 
+  // Extract all meta/link tags for robust attribute-order-independent parsing
+  const metaTags = [...html.matchAll(/<meta\s[^>]+\/?>/gi)].map((m) => m[0]);
+  const linkTags = [...html.matchAll(/<link\s[^>]+\/?>/gi)].map((m) => m[0]);
+
+  const getMetaContent = (attrName: string, attrValue: string): string => {
+    for (const tag of metaTags) {
+      const val = getAttr(tag, attrName);
+      if (val.toLowerCase() === attrValue.toLowerCase()) {
+        return getAttr(tag, "content");
+      }
+    }
+    return "";
+  };
+
   const title = get(/<title[^>]*>([^<]*)<\/title>/i);
-  const desc =
-    get(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i) ||
-    get(/<meta[^>]+content=["']([^"']*)["'][^>]+name=["']description["']/i);
-  const ogTitle =
-    get(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']*)["']/i) ||
-    get(/<meta[^>]+content=["']([^"']*)["'][^>]+property=["']og:title["']/i);
-  const ogDesc =
-    get(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']*)["']/i) ||
-    get(/<meta[^>]+content=["']([^"']*)["'][^>]+property=["']og:description["']/i);
-  const ogImage =
-    get(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']*)["']/i) ||
-    get(/<meta[^>]+content=["']([^"']*)["'][^>]+property=["']og:image["']/i);
-  const twCard =
-    get(/<meta[^>]+name=["']twitter:card["'][^>]+content=["']([^"']*)["']/i) ||
-    get(/<meta[^>]+content=["']([^"']*)["'][^>]+name=["']twitter:card["']/i);
-  const canonical =
-    get(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']*)["']/i) ||
-    get(/<link[^>]+href=["']([^"']*)["'][^>]+rel=["']canonical["']/i);
+  const desc = getMetaContent("name", "description");
+  const ogTitle = getMetaContent("property", "og:title");
+  const ogDesc = getMetaContent("property", "og:description");
+  const ogImage = getMetaContent("property", "og:image");
+  const twCard = getMetaContent("name", "twitter:card");
+
+  let canonical = "";
+  for (const tag of linkTags) {
+    const rel = getAttr(tag, "rel");
+    if (rel.toLowerCase() === "canonical") {
+      canonical = getAttr(tag, "href");
+      break;
+    }
+  }
 
   const tLen = title.length;
   const dLen = desc.length;

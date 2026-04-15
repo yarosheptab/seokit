@@ -24,6 +24,12 @@ export async function GET(req: NextRequest) {
       signal: AbortSignal.timeout(10_000),
     });
     const text = await res.text();
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: `Upstream returned ${res.status} ${res.statusText}` },
+        { status: res.status >= 500 ? 502 : 422 }
+      );
+    }
     return new NextResponse(text, {
       status: 200,
       headers: { "Content-Type": "text/plain; charset=utf-8" },
