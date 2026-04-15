@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --nav-bg: #0f172a;
+  --nav-text: #94a3b8;
+  --body-bg: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --border-2: #cbd5e1;
+  --fg: #0f172a;
+  --muted-fg: #64748b;
+  --subtle: #94a3b8;
+  --accent: #10b981;
+  --accent-hover: #059669;
+  --accent-light: #ecfdf5;
+  --score-yellow: #f59e0b;
+  --score-red: #ef4444;
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--body-bg); color: var(--fg); }
+
+/* Blog prose */
+.prose-content h1, .prose-content h2, .prose-content h3 {
+  color: var(--fg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-content h2 { font-size: 1.25rem; }
+.prose-content h3 { font-size: 1.05rem; }
+.prose-content p { margin-bottom: 1.25rem; color: var(--muted-fg); }
+.prose-content ul, .prose-content ol { padding-left: 1.5rem; margin-bottom: 1.25rem; color: var(--muted-fg); }
+.prose-content li { margin-bottom: 0.4rem; }
+.prose-content code { font-family: var(--font-mono, monospace); font-size: 0.85em; background: var(--body-bg); padding: 0.1em 0.4em; border-radius: 3px; color: var(--accent); }
+.prose-content pre { background: var(--fg); color: #e2e8f0; padding: 1.25rem; border-radius: var(--radius); overflow-x: auto; margin-bottom: 1.25rem; font-family: var(--font-mono, monospace); font-size: 0.85rem; line-height: 1.6; }
+.prose-content pre code { background: none; color: inherit; padding: 0; }
+.prose-content a { color: var(--accent); text-decoration: underline; }
+.prose-content strong { color: var(--fg); font-weight: 700; }
