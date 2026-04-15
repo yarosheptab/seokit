@@ -40,12 +40,13 @@ export default function AboutPage() {
             standard analytics.
           </p>
           <p>
-            seokit is one of five tool-kit sub-sites under{" "}
-            <a href="https://yaro-labs.com" style={{ color: "var(--accent)" }}>
-              yaro-labs.com
+            seokit is built by{" "}
+            <a href="https://yaro-labs.com" target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>
+              Yaro Labs
             </a>
-            . Each site focuses on a different developer workflow: devkit,
-            csskit, jskit, seokit, and apikit.
+            , a small studio focused on developer tools. It is one of five
+            tool-kit sub-sites: devkit, csskit, jskit, seokit, and apikit —
+            each targeting a different developer workflow.
           </p>
           <p>
             Tools included:{" "}
