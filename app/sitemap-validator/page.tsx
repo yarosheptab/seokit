@@ -74,9 +74,9 @@ export default function SitemapValidatorPage() {
           { label: "URL Count", value: String(result.urlCount), color: result.urlCount > 0 ? "var(--accent)" : "var(--score-red)" },
           { label: "Has Lastmod", value: result.hasLastmod ? "Yes" : "No", color: result.hasLastmod ? "var(--accent)" : "var(--score-yellow)" },
         ].map((c) => (
-          <div key={c.label} className="rounded p-4" style={{ background: "var(--surface)", border: "1px solid var(--border-2)" }}>
-            <p className="text-xs mb-1" style={{ color: "var(--subtle)" }}>{c.label}</p>
-            <p className="text-lg font-bold" style={{ color: c.color }}>{c.value}</p>
+          <div key={c.label} className="rounded p-3 sm:p-4" style={{ background: "var(--surface)", border: "1px solid var(--border-2)" }}>
+            <p className="text-xs mb-1 leading-tight" style={{ color: "var(--subtle)" }}>{c.label}</p>
+            <p className="text-base sm:text-lg font-bold leading-tight" style={{ color: c.color }}>{c.value}</p>
           </div>
         ))}
       </div>
@@ -89,19 +89,23 @@ export default function SitemapValidatorPage() {
         </div>
       )}
       <div className="rounded overflow-hidden" style={{ background: "var(--surface)", border: "1px solid var(--border-2)" }}>
-        <div className="grid px-4 py-2 text-xs font-semibold uppercase tracking-widest"
-          style={{ gridTemplateColumns: "1fr 120px 100px 70px", color: "var(--subtle)", borderBottom: "1px solid var(--border)", fontFamily: "var(--font-mono)" }}>
-          <span>URL</span><span>Lastmod</span><span>Changefreq</span><span>Priority</span>
-        </div>
-        {result.urls.slice(0, 50).map((u, i) => (
-          <div key={i} className="grid px-4 py-2.5 text-xs"
-            style={{ gridTemplateColumns: "1fr 120px 100px 70px", borderBottom: i < Math.min(result.urls.length, 50) - 1 ? "1px solid var(--border)" : "none", color: "var(--fg)" }}>
-            <span className="truncate pr-4" style={{ fontFamily: "var(--font-mono)" }}>{u.loc}</span>
-            <span style={{ color: "var(--muted-fg)" }}>{u.lastmod ?? "—"}</span>
-            <span style={{ color: "var(--muted-fg)" }}>{u.changefreq ?? "—"}</span>
-            <span style={{ color: "var(--muted-fg)" }}>{u.priority ?? "—"}</span>
+        <div className="overflow-x-auto">
+          <div style={{ minWidth: 480 }}>
+            <div className="grid px-4 py-2 text-xs font-semibold uppercase tracking-widest"
+              style={{ gridTemplateColumns: "1fr 120px 100px 70px", color: "var(--subtle)", borderBottom: "1px solid var(--border)", fontFamily: "var(--font-mono)" }}>
+              <span>URL</span><span>Lastmod</span><span>Changefreq</span><span>Priority</span>
+            </div>
+            {result.urls.slice(0, 50).map((u, i) => (
+              <div key={i} className="grid px-4 py-2.5 text-xs"
+                style={{ gridTemplateColumns: "1fr 120px 100px 70px", borderBottom: i < Math.min(result.urls.length, 50) - 1 ? "1px solid var(--border)" : "none", color: "var(--fg)" }}>
+                <span className="truncate pr-4" style={{ fontFamily: "var(--font-mono)" }}>{u.loc}</span>
+                <span style={{ color: "var(--muted-fg)" }}>{u.lastmod ?? "—"}</span>
+                <span style={{ color: "var(--muted-fg)" }}>{u.changefreq ?? "—"}</span>
+                <span style={{ color: "var(--muted-fg)" }}>{u.priority ?? "—"}</span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
         {result.urls.length > 50 && (
           <div className="px-4 py-2 text-xs" style={{ color: "var(--subtle)", borderTop: "1px solid var(--border)" }}>
             …and {result.urls.length - 50} more URLs

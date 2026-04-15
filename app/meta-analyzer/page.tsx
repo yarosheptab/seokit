@@ -101,30 +101,31 @@ export default function MetaAnalyzerPage() {
             sub: "Ideal: 50–60",
           },
           {
-            label: "Description length",
+            label: "Desc length",
             value: `${result.descLength} chars`,
             color: result.descLength >= 120 && result.descLength <= 160 ? "var(--accent)" : "var(--score-yellow)",
             sub: "Ideal: 120–160",
           },
         ].map((c) => (
-          <div key={c.label} className="rounded p-4"
+          <div key={c.label} className="rounded p-3 sm:p-4"
             style={{ background: "var(--surface)", border: "1px solid var(--border-2)" }}>
-            <p className="text-xs mb-1" style={{ color: "var(--subtle)" }}>{c.label}</p>
-            <p className="text-lg font-bold" style={{ color: c.color }}>{c.value}</p>
-            {c.sub && <p className="text-xs mt-0.5" style={{ color: "var(--subtle)" }}>{c.sub}</p>}
+            <p className="text-xs mb-1 leading-tight" style={{ color: "var(--subtle)" }}>{c.label}</p>
+            <p className="text-base sm:text-lg font-bold leading-tight" style={{ color: c.color }}>{c.value}</p>
+            {c.sub && <p className="text-xs mt-0.5 hidden sm:block" style={{ color: "var(--subtle)" }}>{c.sub}</p>}
           </div>
         ))}
       </div>
       <div className="rounded overflow-hidden" style={{ background: "var(--surface)", border: "1px solid var(--border-2)" }}>
         {result.tags.map((tag, i) => (
-          <div key={tag.key} className="grid items-center gap-3 px-4 py-3"
+          <div key={tag.key} className="px-4 py-3"
             style={{
-              gridTemplateColumns: "120px 1fr auto",
               borderBottom: i < result.tags.length - 1 ? "1px solid var(--border)" : "none",
             }}>
-            <span className="text-xs" style={{ fontFamily: "var(--font-mono)", color: "var(--subtle)" }}>{tag.key}</span>
-            <span className="text-sm font-medium truncate" style={{ color: "var(--fg)" }}>{tag.value}</span>
-            <StatusBadge status={tag.status} label={tag.note} />
+            <div className="flex items-start justify-between gap-2 flex-wrap">
+              <span className="text-xs shrink-0" style={{ fontFamily: "var(--font-mono)", color: "var(--subtle)", minWidth: 100 }}>{tag.key}</span>
+              <StatusBadge status={tag.status} label={tag.note} />
+            </div>
+            <span className="text-sm font-medium mt-1 block truncate" style={{ color: "var(--fg)" }}>{tag.value}</span>
           </div>
         ))}
       </div>

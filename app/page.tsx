@@ -142,22 +142,12 @@ export default function HomePage() {
               border: "1px solid var(--border-2)",
             }}
           >
-            {tools.map((tool, i) => {
-              const isRightCol = i % 2 === 1;
-              const isLastRow = i >= tools.length - 2;
+            {tools.map((tool) => {
               return (
                 <Link
                   key={tool.slug}
                   href={tool.slug}
-                  className="block p-6 relative transition-colors duration-150 hover:bg-[var(--accent-light)]"
-                  style={{
-                    borderRight: isRightCol
-                      ? "none"
-                      : "1px solid var(--border)",
-                    borderBottom: isLastRow
-                      ? "none"
-                      : "1px solid var(--border)",
-                  }}
+                  className="tool-grid-item block p-6 relative transition-colors duration-150 hover:bg-[var(--accent-light)]"
                 >
                   <div
                     className="text-sm font-semibold mb-3"

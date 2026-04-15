@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <nav
       style={{ background: "var(--nav-bg)", height: 60 }}
-      className="flex items-center justify-between px-6 w-full sticky top-0 z-50"
+      className="flex items-center justify-between px-4 sm:px-6 w-full sticky top-0 z-50"
     >
       <Link
         href="/"
@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="px-3 py-1 rounded text-sm transition-colors duration-150"
+              className="px-2 sm:px-3 py-1 rounded text-sm transition-colors duration-150"
               style={{ color: active ? "#ffffff" : "var(--nav-text)" }}
             >
               {l.label}
@@ -46,7 +46,7 @@ export default function Navbar() {
 
       <Link
         href="/#tools"
-        className="text-white text-sm font-semibold px-4 py-2 rounded transition-colors duration-150 hover:opacity-90"
+        className="text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded transition-colors duration-150 hover:opacity-90 whitespace-nowrap"
         style={{ background: "var(--accent)", borderRadius: "var(--radius)" }}
       >
         Try a tool →

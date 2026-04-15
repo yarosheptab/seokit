@@ -21,6 +21,15 @@
 * { box-sizing: border-box; }
 body { background: var(--body-bg); color: var(--fg); }
 
+/* Tool grid responsive borders */
+.tool-grid-item { border-bottom: 1px solid var(--border); }
+.tool-grid-item:last-child { border-bottom: none; }
+@media (min-width: 768px) {
+  .tool-grid-item { border-right: 1px solid var(--border); }
+  .tool-grid-item:nth-child(2n) { border-right: none; }
+  .tool-grid-item:nth-last-child(-n+2) { border-bottom: none; }
+}
+
 /* Blog prose */
 .prose-content h1, .prose-content h2, .prose-content h3 {
   color: var(--fg);
