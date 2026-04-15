@@ -19,11 +19,49 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const siteTitle = "seokit — SEO Tools for Developers";
+const siteDescription =
+  "SEO analysis tools — Meta Analyzer, Sitemap Validator, Keyword Density, Robots Tester, Redirect Checker, Schema Validator";
+
 export const metadata: Metadata = {
-  title: "seokit — SEO Tools for Developers",
-  description:
-    "Six free SEO tools: meta analyzer, sitemap validator, keyword density, robots tester, redirect checker, schema validator.",
+  title: siteTitle,
+  description: siteDescription,
   metadataBase: new URL("https://seokit.yaro-labs.com"),
+  keywords: [
+    "SEO tools",
+    "meta tag analyzer",
+    "sitemap validator",
+    "keyword density checker",
+    "robots.txt tester",
+    "redirect checker",
+    "schema validator",
+    "free SEO tools",
+    "website SEO analysis",
+  ],
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    url: "https://seokit.yaro-labs.com",
+    siteName: "seokit",
+    type: "website",
+    images: [
+      {
+        url: "https://seokit.yaro-labs.com/og/home.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["https://seokit.yaro-labs.com/og/home.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const GTM_ID = "GTM-T3SS4DD6";
@@ -45,6 +83,31 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "seokit",
+              "url": "https://seokit.yaro-labs.com",
+              "description": siteDescription,
+              "publisher": {
+                "@type": "Organization",
+                "name": "Yaro Labs",
+                "url": "https://yaro-labs.com",
+              },
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://seokit.yaro-labs.com/meta-analyzer?url={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
         <Navbar />
         <main>{children}</main>
         <Footer />
